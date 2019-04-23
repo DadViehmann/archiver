@@ -16,7 +16,7 @@ import org.apache.commons.io.FilenameUtils;
 
 public class ArchiveUpdate {
 	
-	public static void main(String[] args) throws IOException{
+	public static void updateZipArchive() throws IOException{
 		
 		pathSelector zipFileSelector = new pathSelector();
 		String pathString = zipFileSelector.pathSelector();

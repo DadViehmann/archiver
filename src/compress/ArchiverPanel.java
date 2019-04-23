@@ -20,6 +20,7 @@ public class ArchiverPanel {
 		    panel.setLayout(new FlowLayout());
 		    JButton zip = new JButton("ZIP File");
 		    JButton unzip = new JButton("Unzip File");
+		    JButton update = new JButton("Update Existing Archive");
 		    JLabel label = new JLabel();
 		 
 		    // add a JButton to the JPanel.
@@ -28,11 +29,7 @@ public class ArchiverPanel {
 		    
 		    panel.add(unzip);
 		    
-		    panel.add(label);
-		    
-		    Archive store = new Archive();
-		    
-		    Extract pull = new Extract();
+		    panel.add(update);		 
 		    
 		    ZipTester betterZip = new ZipTester();
 		    
@@ -57,7 +54,17 @@ public class ArchiverPanel {
 						e1.printStackTrace();
 					}
 		    	}
-		    });		    		 
+		    });	
+		    
+		    update.addActionListener(new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		try {
+		    			ArchiveUpdate.updateZipArchive();
+		    		} catch (IOException e2) {
+		    			e2.printStackTrace();
+		    		}
+		    	}
+		    });
 		 
 		 
 		    // main window
