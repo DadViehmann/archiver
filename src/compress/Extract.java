@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.GZIPInputStream;
 
+import javax.swing.JFileChooser;
+
 public class Extract {
 	
     public void decompressGzipFile(String gzipFile, String newFile) {
@@ -24,6 +26,16 @@ public class Extract {
     	catch(IOException e) {
     		e.printStackTrace();
     	}
+    }
+    
+    public String extractionSelector() {
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		chooser.showSaveDialog(null);
+		
+		String path = chooser.getSelectedFile().getAbsolutePath();
+		
+		return path;
     }
 
 }

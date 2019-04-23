@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.GZIPOutputStream;
 
+import javax.swing.JFileChooser;
+
 public class Archive {
 	
     public void compressGzipFile(String file, String gzipFile) {
@@ -25,6 +27,16 @@ public class Archive {
             e.printStackTrace();
         }
         
+    }
+    
+    public String compressionSelector() {
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		chooser.showSaveDialog(null);
+		
+		String path = chooser.getSelectedFile().getAbsolutePath();
+		
+		return path;
     }
 	
 }
