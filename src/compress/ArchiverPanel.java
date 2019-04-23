@@ -9,12 +9,30 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 
 public class ArchiverPanel {
 
 	  public static void main(String[] arguments) {
 		  
+		  	try {
+				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			} catch (ClassNotFoundException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			} catch (InstantiationException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			} catch (IllegalAccessException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			} catch (UnsupportedLookAndFeelException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+			}
+		  	
 		    JPanel panel = new JPanel();
 		    panel.setLayout(new FlowLayout());
 		    JButton zip = new JButton("ZIP File");

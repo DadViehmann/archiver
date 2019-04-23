@@ -34,7 +34,7 @@ public class ZipTester {
 						addDirectory(zipOS, childName, child);
 					}
 					else {
-						addDirectory(zipOS, childName, child);
+						writeToZipFile(childName, zipOS);
 					}
 					System.out.println(path);
 				}
