@@ -34,7 +34,7 @@ public class ZipTester {
 						addDirectory(zipOS, childName, child);
 					}
 					else {
-						writeToZipFile(childName, zipOS);
+						addDirectory(zipOS, childName, child);
 					}
 					System.out.println(path);
 				}
@@ -42,7 +42,7 @@ public class ZipTester {
 				fos.close();
 			}
 			else if (path.isFile()) {
-				writeStringToFile(FilenameUtils.getFullPath(pathString));
+				writeStringToFileSingle(pathString);
 				String pathFile = FilenameUtils.getFullPath(pathString) + "\\path.txt";
 				FileOutputStream fos = new FileOutputStream(outputPath + "\\" + zipName + ".zip");
 				ZipOutputStream zipOS = new ZipOutputStream(fos);
@@ -68,7 +68,6 @@ public class ZipTester {
 		
 		System.out.println("Writing file : " + FilenameUtils.getBaseName(path) + " to zip file.");
 		
-		File aFile = new File(path);
 		String pathShort = FilenameUtils.getName(path);
 		FileInputStream fis = new FileInputStream(path);
 		ZipEntry zipEntry = new ZipEntry(pathShort);
@@ -85,11 +84,22 @@ public class ZipTester {
 		fis.close();
 	}
 	
+	//Writes the location of the directory when it was originally archived into a text file. This file is archived
+	//with the files so that it can be pulled out later for the purpose of updating.
 	public static void writeStringToFile(String path) throws IOException{
 		PrintWriter writer = new PrintWriter(path + "\\path.txt", "UTF-8");
+		System.out.println(path);
 		writer.println(path);
 		writer.close();
-		
+	}
+	
+	//To be used when a request to update is sent to a zip file holding a single piece of data. Can replace the data if another file was put into the 
+	//directory, but the filename is the same thing.
+	public static void writeStringToFileSingle(String path) throws IOException{
+		PrintWriter writer = new PrintWriter(FilenameUtils.getFullPath(path) + "\\path.txt", "UTF-8");
+		System.out.println(path);
+		writer.println(path);
+		writer.close();
 	}
 	
 	public static String getRelativePath(String sourceDir, File file) {

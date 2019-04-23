@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import org.apache.commons.io.FilenameUtils;
 
 
 public class ArchiverPanel {
@@ -29,11 +28,9 @@ public class ArchiverPanel {
 		    
 		    panel.add(unzip);
 		    
-		    panel.add(update);		 
+		    panel.add(update);	
 		    
-		    ZipTester betterZip = new ZipTester();
-		    
-		    UnzipFile betterExtract = new UnzipFile();
+		    panel.add(label);
 		    
 		    zip.addActionListener(new ActionListener() {
 		    	public void actionPerformed(ActionEvent e) {
