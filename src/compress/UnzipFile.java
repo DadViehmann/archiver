@@ -8,9 +8,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class UnzipFile {
-	public static void unzipFile() throws IOException {
-		pathSelector zipFileSelector = new pathSelector();
-		String pathString = zipFileSelector.pathSelector();
+	public static void unzipFile(String pathString) throws IOException {
+		//pathSelector zipFileSelector = new pathSelector();
+		//String pathString = zipFileSelector.pathSelector();
 		pathSelector zipFileDest = new pathSelector();
 		File destDir = new File(zipFileDest.pathSelector());
 		

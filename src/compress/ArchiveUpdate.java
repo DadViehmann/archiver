@@ -14,13 +14,12 @@ import org.apache.commons.io.FilenameUtils;
 
 public class ArchiveUpdate {
 	
-	public static void updateZipArchive() throws IOException{
+	public static void updateZipArchive(String pathString) throws IOException{
 		
-		pathSelector zipFileSelector = new pathSelector();
-		String pathString = zipFileSelector.pathSelector();
+		//pathSelector zipFileSelector = new pathSelector();
+		//String pathString = zipFileSelector.pathSelector();
 		File destDir = new File("temp");
 		destDir.mkdirs();
-		System.out.println(FilenameUtils.getBaseName(pathString));
 		
 		byte[] buffer = new byte[1024];
 		ZipInputStream zis = new ZipInputStream(new FileInputStream(pathString));
@@ -57,11 +56,12 @@ public class ArchiveUpdate {
 			currentFile.delete();
 		}
 		Files.deleteIfExists(Paths.get("temp"));
-		System.out.println(storedPath);
+		Files.deleteIfExists(Paths.get(pathString));
 		
-		System.out.println(FilenameUtils.getFullPath(pathString));
+		System.out.println(pathString);
 		
 		ZipTester.zipFile(storedPath, FilenameUtils.getFullPath(pathString));
+		
 	}
 	
 	public static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException{
