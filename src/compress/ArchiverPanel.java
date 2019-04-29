@@ -5,9 +5,11 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
-import java.awt.Color;
+
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -53,8 +55,11 @@ public class ArchiverPanel {
 		    JButton update = new JButton("Update Existing Archive");
 		    JLabel label = new JLabel();
 		    
+		    String userDir = System.getProperty("user.home");
+		    
 		    final JFileChooser fileChooser = new JFileChooser();
 		    fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		    fileChooser.setCurrentDirectory(new File(userDir + "\\Desktop"));
 		    panel.add(fileChooser, BorderLayout.NORTH);
 		 
 		    // add a JButton to the JPanel.
@@ -72,15 +77,20 @@ public class ArchiverPanel {
 		    		//pathSelector fileOrFolder = new pathSelector();
 					String pathString = fileChooser.getSelectedFile().getAbsolutePath();
 					System.out.println(pathString);
-					pathSelector outputPathSelector = new pathSelector();
-					String outputPath = outputPathSelector.pathSelector();
-					System.out.println(FilenameUtils.getFullPath(outputPath));
 					
-					if (outputPath == pathString) {
-						outputPath = FilenameUtils.getFullPath(outputPath);
+					if (FilenameUtils.getExtension(pathString).equals("zip")) {
+						label.setText("Cannot archive zip files");
 					}
-					
-		    		ZipTester.zipFile(pathString, outputPath);
+					else {
+						pathSelector outputPathSelector = new pathSelector();
+						String outputPath = outputPathSelector.pathSelector();
+						System.out.println(FilenameUtils.getFullPath(outputPath));
+						
+						if (outputPath == pathString) {
+							outputPath = FilenameUtils.getFullPath(outputPath);
+						}
+						ZipTester.zipFile(pathString, outputPath);
+					}
 		    	}
 		    });
 		    
@@ -89,7 +99,12 @@ public class ArchiverPanel {
 		    		try {
 		    			File selectedFile = fileChooser.getSelectedFile();
 		    			String pathString = selectedFile.toString();
-						UnzipFile.unzipFile(pathString);
+		    			if (FilenameUtils.getExtension(pathString).contentEquals("zip")) {
+		    				UnzipFile.unzipFile(pathString);
+		    			}
+		    			else {
+		    				label.setText("Selected file is not a zip, cannot be extracted");
+		    			}
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -115,7 +130,7 @@ public class ArchiverPanel {
 		 
 		    // main window
 		    JFrame frame = new JFrame("VZIP Archiver Menu");
-		    frame.setSize(710, 600);
+		    frame.setSize(710, 500);
 		    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		    frame.setLocationRelativeTo(null);
 		 

@@ -32,10 +32,8 @@ public class UnzipFile {
 		zis.close();
 		String[] entries = destDir.list();
 		String f = destDir.toString() + "\\path.txt";
-		System.out.println(f);
 		for(@SuppressWarnings("unused") String s: entries) {
 			File currentFile = new File(f);
-			System.out.println(currentFile.toString());
 			if (currentFile.toString() == f) {
 				currentFile.delete();
 				break;
